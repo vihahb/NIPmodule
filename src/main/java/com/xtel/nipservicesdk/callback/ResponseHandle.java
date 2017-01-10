@@ -1,8 +1,9 @@
 package com.xtel.nipservicesdk.callback;
 
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
-import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
+import com.xtel.nipservicesdk.model.entity.RESP_None;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public abstract class ResponseHandle<T extends RESP_Basic> {
             isJson = !(result == null || result.isEmpty());
 
             if (!isJson) {
-//                onSuccess((T) new RESP_Parking_Info());
+                onSuccess((T) new RESP_None());
             } else {
                 T t = JsonHelper.getObjectNoException(result, clazz);
                 if (t.getError() != null) {
