@@ -17,6 +17,9 @@ public class LoginNipModel {
     private String service_code;
 
     @Expose
+    private String accountType;
+
+    @Expose
     private DeviceObject devInfo;
 
     public String getUsername() {
@@ -49,6 +52,14 @@ public class LoginNipModel {
 
     public void setDevInfo(DeviceObject devInfo) {
         this.devInfo = devInfo;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     @Override

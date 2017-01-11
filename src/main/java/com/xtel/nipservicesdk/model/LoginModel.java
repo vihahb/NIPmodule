@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.commons.Constants;
@@ -73,13 +74,21 @@ public class LoginModel extends BasicModel {
         requestServer.postApi(url_reg_nip_acc, JsonHelper.toJson(registerNipModel), null, responseHandle);
     }
 
-    public void loginNipServices(String user_name, String password, String service_code, ResponseHandle<RESP_Login> responseHandle) {
+    public void loginNipServices(String user_name, String password, String service_code, boolean isPhone, ResponseHandle<RESP_Login> responseHandle) {
         LoginNipModel loginNipModel = new LoginNipModel();
         loginNipModel.setUsername(user_name);
         loginNipModel.setPassword(password);
         loginNipModel.setService_code(service_code);
         loginNipModel.setDevInfo(DeviceInfo.getDeviceObject());
         String request = JsonHelper.toJson(loginNipModel);
+        Log.e("nip_login", JsonHelper.toJson(loginNipModel));
+
+        if (!isPhone) {
+            loginNipModel.setAccountType("EMAIL");
+        } else {
+            loginNipModel.setAccountType("PHONE-NUMBER");
+        }
+
         requestServer.postApi(url_login, JsonHelper.toJson(loginNipModel), null, responseHandle);
     }
 
@@ -143,6 +152,7 @@ public class LoginModel extends BasicModel {
         activeNip.setActivation_code(SharedUtils.getInstance().getStringValue(Constants.USER_ACTIVATION_CODE));
         activeNip.setAccountType(accountType);
 
+        Log.e(this.getClass().getSimpleName(), JsonHelper.toJson(activeNip));
         requestServer.postApi(url_active, JsonHelper.toJson(activeNip), null, responseHandle);
     }
 

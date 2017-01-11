@@ -16,7 +16,7 @@
     <string name="error_activation_wrong">Kích hoạt sai</string>
     <string name="error_account_already_activated">Tài khoản này đã kích hoạt</string>
     <string name="error_url_invalid">Liên kết không còn hiệu lực</string>
-    <string name="error_user_invalid">Email không tồn tại</string>
+    <string name="error_user_invalid">Số điện thoại không tồn tại</string>
     <string name="error_email_invalid">Email không tồn tại</string>
     <string name="error_service_not_support_device">Dịch vụ không hỗ trợ thiết bị</string>
     <string name="error_user_or_password_wrong">Tên đăng nhập hoặc mật khẩu không đúng</string>

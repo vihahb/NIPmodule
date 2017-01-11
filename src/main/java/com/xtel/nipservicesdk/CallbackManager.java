@@ -83,7 +83,7 @@ public class CallbackManager {
                     }
                 });
             } else if ((Integer) object.get(0) == 4){
-                LoginModel.getInstance().loginNipServices((String) object.get(1), (String) object.get(2), (String) object.get(3), new ResponseHandle<RESP_Login>(RESP_Login.class) {
+                LoginModel.getInstance().loginNipServices((String) object.get(1), (String) object.get(2), (String) object.get(3), (Boolean) object.get(4), new ResponseHandle<RESP_Login>(RESP_Login.class) {
                     @Override
                     public void onSuccess(RESP_Login obj) {
                         callbacListener.onSuccess(obj);
@@ -182,7 +182,7 @@ public class CallbackManager {
             iCmd.execute();
     }
 
-    public void LoginNipAcc(String user_name, String password, final CallbacListener callbacListener) {
+    public void LoginNipAcc(String user_name, String password, boolean isPhone, final CallbacListener callbacListener) {
         String service_code = LoginModel.getInstance().getServiceCode(activity);
         if (service_code == null || service_code.isEmpty()) {
             callbacListener.onError(new Error(-2, activity.getString(R.string.error), activity.getString(R.string.error_no_service_code)));
@@ -196,6 +196,7 @@ public class CallbackManager {
         object.add(user_name);
         object.add(password);
         object.add(service_code);
+        object.add(isPhone);
 
         if (checkPermission())
             iCmd.execute();
@@ -277,7 +278,7 @@ public class CallbackManager {
     }
 
     public void activeNipAccount(String authorization_code, String accountType, final CallbackListenerActive callbackListenerActive) {
-        LoginModel.getInstance().activeAccount(authorization_code, accountType, new ResponseHandle<RESP_None>(RESP_None.class) {
+        LoginModel.getInstance().activeAccount(authorization_code, "PHONE-NUMBER", new ResponseHandle<RESP_None>(RESP_None.class) {
             @Override
             public void onSuccess(RESP_None obj) {
                 callbackListenerActive.onSuccess();
