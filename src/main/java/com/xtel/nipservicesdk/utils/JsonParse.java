@@ -30,7 +30,9 @@ public class JsonParse {
 
     public static String getCodeMessage(int code, String content) {
 
-        if (code == 2) {
+        if (code == -2)
+            return MyApplication.context.getString(R.string.error_service_code);
+        else if (code == 2) {
             return MyApplication.context.getString(R.string.error_session_invalid);
         } else if (code == 1) {
             return MyApplication.context.getString(R.string.error_input_invalid);
@@ -52,23 +54,23 @@ public class JsonParse {
             return MyApplication.context.getString(R.string.error_account_already_activated);
         } else if (code == 106) {
             return MyApplication.context.getString(R.string.error_url_invalid);
-        }else if (code == 108) {
+        } else if (code == 108) {
             return MyApplication.context.getString(R.string.error_user_invalid);
-        }else if (code == 109) {
+        } else if (code == 109) {
             return MyApplication.context.getString(R.string.error_email_invalid);
-        }else if (code == 110) {
+        } else if (code == 110) {
             return MyApplication.context.getString(R.string.error_service_not_support_device);
-        }else if (code == 111) {
+        } else if (code == 111) {
             return MyApplication.context.getString(R.string.error_user_or_password_wrong);
-        }else if (code == 112) {
+        } else if (code == 112) {
             return MyApplication.context.getString(R.string.error_account_not_active);
-        }else if (code == 113) {
+        } else if (code == 113) {
             return MyApplication.context.getString(R.string.error_authentication_id_wrong);
-        }else if (code == 114) {
+        } else if (code == 114) {
             return MyApplication.context.getString(R.string.error_authentication_id_invalid);
-        }else if (code == 117) {
+        } else if (code == 117) {
             return MyApplication.context.getString(R.string.error_facebook_access_token_invalid);
-        }else if (code == 118) {
+        } else if (code == 118) {
             return MyApplication.context.getString(R.string.error_phone_number_wrong);
         } else {
             return content;

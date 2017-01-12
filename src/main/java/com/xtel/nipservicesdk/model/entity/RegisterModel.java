@@ -14,9 +14,6 @@ public class RegisterModel extends LoginNipModel {
     @Expose
     private int sendEmail;
 
-    @Expose
-    private String accountType;
-
     public String getEmail() {
         return email;
     }
@@ -33,20 +30,12 @@ public class RegisterModel extends LoginNipModel {
         this.sendEmail = sendEmail;
     }
 
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
 
     @Override
     public String toString() {
         return "RegisterModel{" +
                 "email='" + email + '\'' +
                 ", sendEmail=" + sendEmail +
-                ", accountType='" + accountType + '\'' +
                 '}';
     }
 }

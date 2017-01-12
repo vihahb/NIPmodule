@@ -8,7 +8,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_Reset;
  */
 
 public interface CallbackListenerReset {
-    void onSuccess(RESP_Reset reset);
+    void onSuccess();
 
     void onError(Error error);
 

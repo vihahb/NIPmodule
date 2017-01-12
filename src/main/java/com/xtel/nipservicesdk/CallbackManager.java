@@ -108,10 +108,10 @@ public class CallbackManager {
                     }
                 });
             } else if ((Integer) object.get(0) == 6) {
-                LoginModel.getInstance().resetPassworf((String) object.get(1), (String) object.get(2), (String) object.get(3), (boolean) object.get(4), (String) object.get(5), new ResponseHandle<RESP_Reset>(RESP_Reset.class) {
+                LoginModel.getInstance().resetPassworf((String) object.get(1), (String) object.get(2), (String) object.get(3), (boolean) object.get(4), (String) object.get(5), new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
-                    public void onSuccess(RESP_Reset obj) {
-                        callbackListenerReset.onSuccess(obj);
+                    public void onSuccess(RESP_None obj) {
+                        callbackListenerReset.onSuccess();
                     }
 
                     @Override
@@ -225,11 +225,17 @@ public class CallbackManager {
     }
 
     public void AdapterReset(String user_email, String password, String authorization_code, final CallbackListenerReset callbackListenerReset) {
+        String service_code = LoginModel.getInstance().getServiceCode(activity);
+        if (service_code == null || service_code.isEmpty()) {
+            callbackListenerReset.onError(new Error(-2, activity.getString(R.string.error), activity.getString(R.string.error_no_service_code)));
+            return;
+        }
+
         this.callbackListenerReset = callbackListenerReset;
-        if (!checkNumber(user_email)) {
+        if (user_email != null) {
             resetNipAccount(user_email, null, false, null);
         } else {
-            resetNipAccount(user_email, password, true, authorization_code);
+            resetNipAccount("", password, true, authorization_code);
         }
     }
 
@@ -261,7 +267,7 @@ public class CallbackManager {
 
         String service_code = LoginModel.getInstance().getServiceCode(activity);
         if (service_code == null || service_code.isEmpty()) {
-            callbacListenerRegister.onError(new Error(-2, activity.getString(R.string.error), activity.getString(R.string.error_no_service_code)));
+            callbackListenerReset.onError(new Error(-2, activity.getString(R.string.error), activity.getString(R.string.error_no_service_code)));
             return;
         }
 
@@ -272,13 +278,21 @@ public class CallbackManager {
         object.add(service_code);
         object.add(isPhone);
         object.add(authorization_code);
+        object.add(service_code);
 
         iCmd.execute();
 
     }
 
     public void activeNipAccount(String authorization_code, String accountType, final CallbackListenerActive callbackListenerActive) {
-        LoginModel.getInstance().activeAccount(authorization_code, "PHONE-NUMBER", new ResponseHandle<RESP_None>(RESP_None.class) {
+        String service_code = LoginModel.getInstance().getServiceCode(activity);
+
+        if (service_code == null || service_code.isEmpty()) {
+            callbackListenerActive.onError(new Error(-2, activity.getString(R.string.error), activity.getString(R.string.error_no_service_code)));
+            return;
+        }
+
+        LoginModel.getInstance().activeAccount(authorization_code, accountType, service_code, new ResponseHandle<RESP_None>(RESP_None.class) {
             @Override
             public void onSuccess(RESP_None obj) {
                 callbackListenerActive.onSuccess();
@@ -302,6 +316,7 @@ public class CallbackManager {
         LoginModel.getInstance().reactiveNipAccoint(user_name, service_code, isPhone, new ResponseHandle<RESP_Reactive>(RESP_Reactive.class) {
             @Override
             public void onSuccess(RESP_Reactive obj) {
+                SharedUtils.getInstance().putStringValue(Constants.USER_ACTIVATION_CODE, obj.getActivation_code());
                 callbacListener.onSuccess(obj);
             }
 

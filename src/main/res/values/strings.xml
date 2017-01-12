@@ -3,6 +3,7 @@
 
     <string name="error">ERROR</string>
     <!-- ERROR CODE -->
+    <string name="error_service_code">Không tìm thấy mã dịch vụ</string>
     <string name="can_not_request">Không thể kết nối tới Server</string>
     <string name="error_no_service_code">Không tìm thấy service code</string>
     <string name="error_session_invalid">Phiên làm việc đã hết hiệu lực</string>

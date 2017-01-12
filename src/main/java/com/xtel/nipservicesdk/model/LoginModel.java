@@ -59,19 +59,22 @@ public class LoginModel extends BasicModel {
 
 
     public void registerAccountNip(String user_name, String password, String email, boolean isPhone, String service_code, ResponseHandle<RESP_Register> responseHandle) {
-        RegisterModel registerNipModel = new RegisterModel();
-        registerNipModel.setUsername(user_name);
-        registerNipModel.setPassword(password);
-        registerNipModel.setEmail(email);
-        registerNipModel.setService_code(service_code);
+        RegisterModel register = new RegisterModel();
+        register.setUsername(user_name);
+        register.setPassword(password);
+        register.setEmail(email);
+        register.setService_code(service_code);
         if (!isPhone) {
-            registerNipModel.setAccountType("EMAIL");
-            registerNipModel.setSendEmail(1);
+            register.setAccountType("EMAIL");
+            register.setSendEmail(1);
         } else {
-            registerNipModel.setSendEmail(0);
-            registerNipModel.setAccountType("PHONE-NUMBER");
+            register.setSendEmail(0);
+            register.setAccountType("PHONE-NUMBER");
         }
-        requestServer.postApi(url_reg_nip_acc, JsonHelper.toJson(registerNipModel), null, responseHandle);
+
+        Log.e("registerAccountNip", JsonHelper.toJson(register));
+
+        requestServer.postApi(url_reg_nip_acc, JsonHelper.toJson(register), null, responseHandle);
     }
 
     public void loginNipServices(String user_name, String password, String service_code, boolean isPhone, ResponseHandle<RESP_Login> responseHandle) {
@@ -92,7 +95,7 @@ public class LoginModel extends BasicModel {
         requestServer.postApi(url_login, JsonHelper.toJson(loginNipModel), null, responseHandle);
     }
 
-    public void resetPassworf(String email, String password, String service_code, boolean isPhone, String authorization_code, ResponseHandle<RESP_Reset> responseHandle) {
+    public void resetPassworf(String email, String password, String service_code, boolean isPhone, String authorization_code, ResponseHandle responseHandle) {
         ResetEntity resetEntity = new ResetEntity();
 
         resetEntity.setService_code(service_code);
@@ -127,6 +130,7 @@ public class LoginModel extends BasicModel {
             reactiveNip.setAccountType("EMAIL");
         }
 
+        Log.e("reactiveNipAccoint", JsonHelper.toJson(reactiveNip));
         requestServer.putApi(url_reactive, JsonHelper.toJson(reactiveNip), null, responseHandle);
     }
 
@@ -145,14 +149,15 @@ public class LoginModel extends BasicModel {
         requestServer.postApi(url_authen, JsonHelper.toJson(authenNip), null, responseHandle);
     }
 
-    public void activeAccount(String authorization_code, String accountType, ResponseHandle responseHandle) {
+    public void activeAccount(String authorization_code, String accountType, String service_code, ResponseHandle responseHandle) {
         String url_active = Constants.URL_NIP + Constants.API_ACTIVE_ACCOUNT;
         ActiveNip activeNip = new ActiveNip();
         activeNip.setAuthorization_code(authorization_code);
         activeNip.setActivation_code(SharedUtils.getInstance().getStringValue(Constants.USER_ACTIVATION_CODE));
         activeNip.setAccountType(accountType);
+        activeNip.setService_code(service_code);
 
-        Log.e(this.getClass().getSimpleName(), JsonHelper.toJson(activeNip));
+        Log.e("activeAccount", JsonHelper.toJson(activeNip));
         requestServer.postApi(url_active, JsonHelper.toJson(activeNip), null, responseHandle);
     }
 
