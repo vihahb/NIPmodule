@@ -14,11 +14,15 @@ public class LoginManager {
         MyApplication.context = context;
     }
 
-    public static String getCurrentSessiong() {
+    public static String getCurrentSession() {
         return LoginModel.getInstance().getSessiong();
     }
 
     public static void LogOut() {
+        LoginModel.getInstance().logout();
+    }
+
+    public static void logOut() {
         LoginModel.getInstance().logout();
     }
 }

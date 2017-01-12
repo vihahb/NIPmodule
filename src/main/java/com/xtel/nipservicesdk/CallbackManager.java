@@ -86,6 +86,7 @@ public class CallbackManager {
                 LoginModel.getInstance().loginNipServices((String) object.get(1), (String) object.get(2), (String) object.get(3), (Boolean) object.get(4), new ResponseHandle<RESP_Login>(RESP_Login.class) {
                     @Override
                     public void onSuccess(RESP_Login obj) {
+                        saveLoginInfo(obj);
                         callbacListener.onSuccess(obj);
                     }
 
@@ -328,13 +329,13 @@ public class CallbackManager {
     }
 
     private void saveLoginInfo(RESP_Login obj) {
-        SharedUtils.getInstance().putStringValue(Constants.SESSION, obj.getSession());
         SharedUtils.getInstance().putLongValue(Constants.TIME_ALIVE, (obj.getTime_alive() * 60));
         SharedUtils.getInstance().putLongValue(Constants.BEGIN_TIME, System.currentTimeMillis());
 
         if (obj.getAuthenticationid() != null && !obj.getAuthenticationid().isEmpty())
             SharedUtils.getInstance().putStringValue(Constants.USER_AUTH_ID, obj.getAuthenticationid());
-        SharedUtils.getInstance().putStringValue(Constants.SESSION, obj.getSession());
+        if (obj.getSession() != null && !obj.getSession().isEmpty())
+            SharedUtils.getInstance().putStringValue(Constants.USER_SESSION, obj.getSession());
 
 //        checkLogedTime();
     }

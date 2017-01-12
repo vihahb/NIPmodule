@@ -136,7 +136,7 @@ public class LoginModel extends BasicModel {
 
 
     public String getSessiong() {
-        return SharedUtils.getInstance().getStringValue(Constants.SESSION);
+        return SharedUtils.getInstance().getStringValue(Constants.USER_SESSION);
     }
 
     public void getNewSession(String service_code, ResponseHandle<RESP_Login> responseHandle) {
