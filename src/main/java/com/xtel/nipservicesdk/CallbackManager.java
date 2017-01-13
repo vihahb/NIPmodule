@@ -133,7 +133,7 @@ public class CallbackManager {
     }
 
     public String getCurrentSession() {
-        return LoginModel.getInstance().getSessiong();
+        return LoginModel.getInstance().getSession();
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -329,8 +329,8 @@ public class CallbackManager {
     }
 
     private void saveLoginInfo(RESP_Login obj) {
-        SharedUtils.getInstance().putLongValue(Constants.TIME_ALIVE, (obj.getTime_alive() * 60));
-        SharedUtils.getInstance().putLongValue(Constants.BEGIN_TIME, System.currentTimeMillis());
+//        SharedUtils.getInstance().putLongValue(Constants.TIME_ALIVE, (obj.getTime_alive() * 60));
+//        SharedUtils.getInstance().putLongValue(Constants.BEGIN_TIME, System.currentTimeMillis());
 
         if (obj.getAuthenticationid() != null && !obj.getAuthenticationid().isEmpty())
             SharedUtils.getInstance().putStringValue(Constants.USER_AUTH_ID, obj.getAuthenticationid());

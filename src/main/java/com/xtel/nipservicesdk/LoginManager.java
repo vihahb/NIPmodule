@@ -2,6 +2,7 @@ package com.xtel.nipservicesdk;
 
 import android.content.Context;
 
+import com.xtel.nipservicesdk.commons.Constants;
 import com.xtel.nipservicesdk.model.LoginModel;
 
 /**
@@ -15,14 +16,14 @@ public class LoginManager {
     }
 
     public static String getCurrentSession() {
-        return LoginModel.getInstance().getSessiong();
-    }
-
-    public static void LogOut() {
-        LoginModel.getInstance().logout();
+        return LoginModel.getInstance().getSession();
     }
 
     public static void logOut() {
         LoginModel.getInstance().logout();
+    }
+
+    public static String getCurrentAuthenticationId() {
+        return LoginModel.getInstance().getCurrentAuthenticationId();
     }
 }

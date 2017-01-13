@@ -47,6 +47,7 @@ public class Constants {
 
 
 
+    public static final String USER_ACCOUNT = "user_account";
     public static final String USER_AUTH_ID = "user_auth_id";
     public static final String USER_SESSION = "user_session";
     public static final String USER_ACTIVATION_CODE = "user_activation_code";
