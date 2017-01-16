@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NipServiceSdk</string>
 
-    <string name="error">ERROR</string>
+    <string name="error">Có lỗi xảy ra</string>
     <!-- ERROR CODE -->
     <string name="error_service_code">Không tìm thấy mã dịch vụ</string>
     <string name="can_not_request">Không thể kết nối tới Server</string>
