@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.xtel.nipservicesdk.callback.ResponseHandle;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.commons.Cts;
 import com.xtel.nipservicesdk.model.entity.ActiveNip;
 import com.xtel.nipservicesdk.model.entity.AuthenNip;
 import com.xtel.nipservicesdk.model.entity.AuthenNipModel;
@@ -15,7 +15,6 @@ import com.xtel.nipservicesdk.model.entity.LoginNipModel;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.model.entity.RESP_Reactive;
 import com.xtel.nipservicesdk.model.entity.RESP_Register;
-import com.xtel.nipservicesdk.model.entity.RESP_Reset;
 import com.xtel.nipservicesdk.model.entity.ReactiveNip;
 import com.xtel.nipservicesdk.model.entity.RegisterModel;
 import com.xtel.nipservicesdk.model.entity.ResetEntity;
@@ -29,12 +28,12 @@ import com.xtel.nipservicesdk.utils.SharedUtils;
 
 public class LoginModel extends BasicModel {
     private static LoginModel instance = new LoginModel();
-    String url_facebook = Constants.URL_NIP + Constants.API_FACEBOOK;
-    String url_account_kit = Constants.URL_NIP + Constants.API_ACCOUNT_KIT;
-    String url_sesion_authenticate = Constants.URL_NIP + Constants.API_SESSION_AUTHENTICATE;
-    String url_reg_nip_acc = Constants.URL_NIP + Constants.API_REGISTER_NIP;
-    String url_reset_password = Constants.URL_NIP + Constants.API_RESET_ACC_NIP;
-    String url_login = Constants.URL_NIP + Constants.API_LOGIN_ACC_NIP;
+    String url_facebook = Cts.URL_NIP + Cts.API_FACEBOOK;
+    String url_account_kit = Cts.URL_NIP + Cts.API_ACCOUNT_KIT;
+    String url_sesion_authenticate = Cts.URL_NIP + Cts.API_SESSION_AUTHENTICATE;
+    String url_reg_nip_acc = Cts.URL_NIP + Cts.API_REGISTER_NIP;
+    String url_reset_password = Cts.URL_NIP + Cts.API_RESET_ACC_NIP;
+    String url_login = Cts.URL_NIP + Cts.API_LOGIN_ACC_NIP;
 
     public static LoginModel getInstance() {
         return instance;
@@ -116,7 +115,7 @@ public class LoginModel extends BasicModel {
     }
 
     public void reactiveNipAccoint(String user_name, String service_code, boolean isPhone, ResponseHandle<RESP_Reactive> responseHandle) {
-        String url_reactive = Constants.URL_NIP + Constants.API_RE_ACTIVE_ACC_NIP;
+        String url_reactive = Cts.URL_NIP + Cts.API_RE_ACTIVE_ACC_NIP;
 
         ReactiveNip reactiveNip = new ReactiveNip();
         reactiveNip.setUsername(user_name);
@@ -136,28 +135,28 @@ public class LoginModel extends BasicModel {
 
 
     public String getSession() {
-        return SharedUtils.getInstance().getStringValue(Constants.USER_SESSION);
+        return SharedUtils.getInstance().getStringValue(Cts.USER_SESSION);
     }
 
     public String getCurrentAuthenticationId() {
-        return SharedUtils.getInstance().getStringValue(Constants.USER_AUTH_ID);
+        return SharedUtils.getInstance().getStringValue(Cts.USER_AUTH_ID);
     }
 
     public void getNewSession(String service_code, ResponseHandle<RESP_Login> responseHandle) {
         AuthenNip authenNip = new AuthenNip();
-        authenNip.setAuthenticationid(SharedUtils.getInstance().getStringValue(Constants.USER_AUTH_ID));
+        authenNip.setAuthenticationid(SharedUtils.getInstance().getStringValue(Cts.USER_AUTH_ID));
         authenNip.setService_code(service_code);
         authenNip.setDevInfo(DeviceInfo.getDeviceObject());
 
-        String url_authen = Constants.URL_NIP + Constants.API_SESSION_AUTHENTICATE;
+        String url_authen = Cts.URL_NIP + Cts.API_SESSION_AUTHENTICATE;
         requestServer.postApi(url_authen, JsonHelper.toJson(authenNip), null, responseHandle);
     }
 
     public void activeAccount(String authorization_code, String accountType, String service_code, ResponseHandle responseHandle) {
-        String url_active = Constants.URL_NIP + Constants.API_ACTIVE_ACCOUNT;
+        String url_active = Cts.URL_NIP + Cts.API_ACTIVE_ACCOUNT;
         ActiveNip activeNip = new ActiveNip();
         activeNip.setAuthorization_code(authorization_code);
-        activeNip.setActivation_code(SharedUtils.getInstance().getStringValue(Constants.USER_ACTIVATION_CODE));
+        activeNip.setActivation_code(SharedUtils.getInstance().getStringValue(Cts.USER_ACTIVATION_CODE));
         activeNip.setAccountType(accountType);
         activeNip.setService_code(service_code);
 
@@ -169,7 +168,7 @@ public class LoginModel extends BasicModel {
         try {
             ApplicationInfo ai = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = ai.metaData;
-            return bundle.getString(Constants.META_DATA_NAME);
+            return bundle.getString(Cts.META_DATA_NAME);
         } catch (PackageManager.NameNotFoundException | NullPointerException e) {
             e.printStackTrace();
             return null;

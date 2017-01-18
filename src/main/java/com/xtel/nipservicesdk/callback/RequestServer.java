@@ -2,9 +2,9 @@ package com.xtel.nipservicesdk.callback;
 
 import android.os.AsyncTask;
 
-import com.xtel.nipservicesdk.MyApplication;
+import com.xtel.nipservicesdk.NipApplication;
 import com.xtel.nipservicesdk.R;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.commons.Cts;
 import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class RequestServer {
                 }
 
                 if (params[2] != null)
-                    builder.header(Constants.SESSION, params[2]);
+                    builder.header(Cts.SESSION, params[2]);
 
                 Request request = builder.build();
 
@@ -82,7 +82,7 @@ public class RequestServer {
             if (isSuccess)
                 responseHandle.onSuccess(s);
             else
-                responseHandle.onError(new Error(-1, MyApplication.context.getString(R.string.error), MyApplication.context.getString(R.string.can_not_request)));
+                responseHandle.onError(new Error(-1, NipApplication.context.getString(R.string.error), NipApplication.context.getString(R.string.can_not_request)));
         }
     }
 
@@ -103,7 +103,7 @@ public class RequestServer {
                 builder.url(params[0]);
 
                 if (params[1] != null)
-                    builder.header(Constants.SESSION, params[1]);
+                    builder.header(Cts.SESSION, params[1]);
 
                 Request request = builder.build();
 
@@ -120,7 +120,7 @@ public class RequestServer {
             if (isSuccess)
                 responseHandle.onSuccess(s);
             else
-                responseHandle.onError(new Error(-1, MyApplication.context.getString(R.string.error), MyApplication.context.getString(R.string.can_not_request)));
+                responseHandle.onError(new Error(-1, NipApplication.context.getString(R.string.error), NipApplication.context.getString(R.string.can_not_request)));
         }
     }
 
@@ -147,7 +147,7 @@ public class RequestServer {
                 }
 
                 if (params[2] != null)
-                    builder.header(Constants.SESSION, params[2]);
+                    builder.header(Cts.SESSION, params[2]);
 
                 Request request = builder.build();
 
@@ -165,7 +165,7 @@ public class RequestServer {
             if (isSuccess)
                 responseHandle.onSuccess(s);
             else
-                responseHandle.onError(new Error(-1, MyApplication.context.getString(R.string.error), MyApplication.context.getString(R.string.can_not_request)));
+                responseHandle.onError(new Error(-1, NipApplication.context.getString(R.string.error), NipApplication.context.getString(R.string.can_not_request)));
         }
     }
 
@@ -192,7 +192,7 @@ public class RequestServer {
                 }
 
                 if (params[2] != null)
-                    builder.header(Constants.SESSION, params[2]);
+                    builder.header(Cts.SESSION, params[2]);
 
                 Request request = builder.build();
 
@@ -209,7 +209,7 @@ public class RequestServer {
             if (isSuccess)
                 responseHandle.onSuccess(s);
             else
-                responseHandle.onError(new Error(-1, MyApplication.context.getString(R.string.error), MyApplication.context.getString(R.string.can_not_request)));
+                responseHandle.onError(new Error(-1, NipApplication.context.getString(R.string.error), NipApplication.context.getString(R.string.can_not_request)));
         }
     }
 }

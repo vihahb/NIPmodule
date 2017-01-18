@@ -4,7 +4,7 @@ package com.xtel.nipservicesdk.commons;
  * Created by Lê Công Long Vũ on 12/27/2016
  */
 
-public class Constants {
+public class Cts {
     public static final String SHARED_NAME = "nip_service_sdk";
     public static final String SESSION = "session";
     public static final String BEGIN_TIME = "begin_time";

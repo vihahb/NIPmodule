@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.xtel.nipservicesdk.MyApplication;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.NipApplication;
+import com.xtel.nipservicesdk.commons.Cts;
 
 /**
  * Created by Lê Công Long Vũ on 11/4/2016
@@ -22,7 +22,7 @@ public class SharedUtils {
     }
 
     private SharedUtils() {
-        sharedPreferences = MyApplication.context.getSharedPreferences(Constants.SHARED_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = NipApplication.context.getSharedPreferences(Cts.SHARED_NAME, Context.MODE_PRIVATE);
     }
 
     @SuppressLint("CommitPrefEdits")

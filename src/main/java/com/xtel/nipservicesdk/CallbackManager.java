@@ -12,14 +12,13 @@ import com.xtel.nipservicesdk.callback.CallbackListenerReactive;
 import com.xtel.nipservicesdk.callback.CallbackListenerReset;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.commons.Cts;
 import com.xtel.nipservicesdk.model.LoginModel;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.model.entity.RESP_Reactive;
 import com.xtel.nipservicesdk.model.entity.RESP_Register;
-import com.xtel.nipservicesdk.model.entity.RESP_Reset;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.nipservicesdk.utils.SharedUtils;
 
@@ -99,7 +98,7 @@ public class CallbackManager {
                 LoginModel.getInstance().registerAccountNip((String) object.get(1), (String) object.get(2), (String) object.get(3), (boolean) object.get(4), (String) object.get(5), new ResponseHandle<RESP_Register>(RESP_Register.class) {
                     @Override
                     public void onSuccess(RESP_Register obj) {
-                        SharedUtils.getInstance().putStringValue(Constants.USER_ACTIVATION_CODE, obj.getActivation_code());
+                        SharedUtils.getInstance().putStringValue(Cts.USER_ACTIVATION_CODE, obj.getActivation_code());
                         callbacListenerRegister.onSuccess(obj);
                     }
 
@@ -317,7 +316,7 @@ public class CallbackManager {
         LoginModel.getInstance().reactiveNipAccoint(user_name, service_code, isPhone, new ResponseHandle<RESP_Reactive>(RESP_Reactive.class) {
             @Override
             public void onSuccess(RESP_Reactive obj) {
-                SharedUtils.getInstance().putStringValue(Constants.USER_ACTIVATION_CODE, obj.getActivation_code());
+                SharedUtils.getInstance().putStringValue(Cts.USER_ACTIVATION_CODE, obj.getActivation_code());
                 callbacListener.onSuccess(obj);
             }
 
@@ -329,21 +328,21 @@ public class CallbackManager {
     }
 
     private void saveLoginInfo(RESP_Login obj) {
-//        SharedUtils.getInstance().putLongValue(Constants.TIME_ALIVE, (obj.getTime_alive() * 60));
-//        SharedUtils.getInstance().putLongValue(Constants.BEGIN_TIME, System.currentTimeMillis());
+//        SharedUtils.getInstance().putLongValue(Cts.TIME_ALIVE, (obj.getTime_alive() * 60));
+//        SharedUtils.getInstance().putLongValue(Cts.BEGIN_TIME, System.currentTimeMillis());
 
         if (obj.getAuthenticationid() != null && !obj.getAuthenticationid().isEmpty())
-            SharedUtils.getInstance().putStringValue(Constants.USER_AUTH_ID, obj.getAuthenticationid());
+            SharedUtils.getInstance().putStringValue(Cts.USER_AUTH_ID, obj.getAuthenticationid());
         if (obj.getSession() != null && !obj.getSession().isEmpty())
-            SharedUtils.getInstance().putStringValue(Constants.USER_SESSION, obj.getSession());
+            SharedUtils.getInstance().putStringValue(Cts.USER_SESSION, obj.getSession());
 
 //        checkLogedTime();
     }
 
 //    private void checkLogedTime() {
 //        final long current_time = System.currentTimeMillis();
-//        long begin_time = SharedUtils.getInstance().getLongValue(Constants.BEGIN_TIME);
-//        long time_alive = SharedUtils.getInstance().getLongValue(Constants.TIME_ALIVE);
+//        long begin_time = SharedUtils.getInstance().getLongValue(Cts.BEGIN_TIME);
+//        long time_alive = SharedUtils.getInstance().getLongValue(Cts.TIME_ALIVE);
 //        final long total_time = begin_time + time_alive;
 //
 //        if (time_alive <= 0) {

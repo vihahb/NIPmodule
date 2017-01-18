@@ -2,7 +2,6 @@ package com.xtel.nipservicesdk;
 
 import android.content.Context;
 
-import com.xtel.nipservicesdk.commons.Constants;
 import com.xtel.nipservicesdk.model.LoginModel;
 
 /**
@@ -12,7 +11,7 @@ import com.xtel.nipservicesdk.model.LoginModel;
 public class LoginManager {
 
     public static void sdkInitialize(Context context) {
-        MyApplication.context = context;
+        NipApplication.context = context;
     }
 
     public static String getCurrentSession() {
