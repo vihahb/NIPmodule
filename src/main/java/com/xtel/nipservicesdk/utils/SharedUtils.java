@@ -15,9 +15,11 @@ public class SharedUtils {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private static final SharedUtils instance = new SharedUtils();
+    private static SharedUtils instance;
 
     public static SharedUtils getInstance() {
+        if (instance == null)
+            instance = new SharedUtils();
         return instance;
     }
 

@@ -27,7 +27,7 @@ import com.xtel.nipservicesdk.utils.SharedUtils;
  */
 
 public class LoginModel extends BasicModel {
-    private static LoginModel instance = new LoginModel();
+    private static LoginModel instance;
     String url_facebook = Cts.URL_NIP + Cts.API_FACEBOOK;
     String url_account_kit = Cts.URL_NIP + Cts.API_ACCOUNT_KIT;
     String url_sesion_authenticate = Cts.URL_NIP + Cts.API_SESSION_AUTHENTICATE;
@@ -36,6 +36,8 @@ public class LoginModel extends BasicModel {
     String url_login = Cts.URL_NIP + Cts.API_LOGIN_ACC_NIP;
 
     public static LoginModel getInstance() {
+        if (instance == null)
+            instance = new LoginModel();
         return instance;
     }
 
